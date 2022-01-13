@@ -58,7 +58,28 @@ function ListItem({
   )
 }
 
-ListItem = React.memo(ListItem)
+ListItem = React.memo(ListItem, (previousProps, nextProps) => {
+  if (
+    previousProps.getItemProps !== nextProps.getItemProps ||
+    previousProps.items !== nextProps.items ||
+    previousProps.index !== nextProps.index ||
+    previousProps.selectedItem !== nextProps.selectedItem
+  ) {
+    // ListItem requires a re-render
+    return false
+  }
+
+  if (previousProps.highlightedIndex !== nextProps.highlightedIndex) {
+    const wasHighlighted = previousProps.highlightedIndex === previousProps.index
+    const nowHighlighted = nextProps.highlightedIndex === nextProps.index
+
+    // May or may not require a re-render.
+    return wasHighlighted === nowHighlighted
+  }
+
+  // ListItem does not require a re-render
+  return true
+})
 
 function App() {
   const forceRerender = useForceRerender()
