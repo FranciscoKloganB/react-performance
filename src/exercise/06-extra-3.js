@@ -40,14 +40,14 @@ Grid = React.memo(Grid)
 function withStateSlice(Comp, slice) {
   const MemoComp = React.memo(Comp)
 
-  function Wrapper(props) {
+  function Wrapper(props, ref) {
     const state = useAppState()
-    return <MemoComp state={slice(state, props)} {...props} />
+    return <MemoComp ref={ref} state={slice(state, props)} {...props} />
   }
 
   Wrapper.displayName = `withStateSlice(${Comp.displayName || Comp.name})`
 
-  return React.memo(Wrapper)
+  return React.memo(React.forwardRef(Wrapper))
 }
 
 function Cell({state: cell, row, column}) {
