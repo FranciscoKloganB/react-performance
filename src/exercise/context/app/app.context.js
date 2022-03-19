@@ -1,5 +1,5 @@
-import {React} from 'react'
-import { appReducer } from './app.reducer'
+import * as React from 'react'
+import {appReducer} from './app.reducer'
 
 const AppStateContext = React.createContext()
 const AppDispatchContext = React.createContext()

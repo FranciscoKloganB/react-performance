@@ -1,4 +1,4 @@
-import { React } from 'react';
+import * as React from 'react'
 
 const DogStateContext = React.createContext()
 DogStateContext.displayName = 'DogStateContext'
@@ -13,7 +13,7 @@ export function useDogState() {
   return context
 }
 
-export function DogProvider({ children }) {
+export function DogProvider({children}) {
   const value = React.useState('')
 
   return (
